@@ -1,0 +1,3 @@
+include ':CrossSweepArcView'
+include ':app'
+rootProject.name = "LinkedCrossSweepArcView"
