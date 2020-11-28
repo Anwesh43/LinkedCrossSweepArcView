@@ -119,8 +119,8 @@ class CrossSweepArcView(ctx : Context) : View(ctx) {
         }
 
         fun start() {
-            if (animated) {
-                animated = false
+            if (!animated) {
+                animated = true
                 view.postInvalidate()
             }
         }
@@ -214,7 +214,7 @@ class CrossSweepArcView(ctx : Context) : View(ctx) {
 
         fun handleTap() {
             csa.startUpdating {
-                animator.stop()
+                animator.start()
             }
         }
     }
