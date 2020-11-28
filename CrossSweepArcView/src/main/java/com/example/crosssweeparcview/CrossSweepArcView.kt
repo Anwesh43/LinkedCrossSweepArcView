@@ -104,7 +104,7 @@ class CrossSweepArcView(ctx : Context) : View(ctx) {
 
     data class Animator(var view : View, var animated : Boolean = false) {
 
-        fun animated(cb : () -> Unit) {
+        fun animate(cb : () -> Unit) {
             if (animated) {
                 cb()
                 try {
@@ -191,6 +191,28 @@ class CrossSweepArcView(ctx : Context) : View(ctx) {
 
         fun startUpdating(cb : () -> Unit) {
             curr.startUpdating(cb)
+        }
+    }
+
+    data class Renderer(var view : CrossSweepArcView) {
+
+        private val csa : CrossSweepArc = CrossSweepArc(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            csa.draw(canvas, paint)
+            animator.animate {
+                csa.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            csa.startUpdating {
+                animator.stop()
+            }
         }
     }
 }
