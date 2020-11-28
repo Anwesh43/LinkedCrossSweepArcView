@@ -218,4 +218,13 @@ class CrossSweepArcView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : CrossSweepArcView {
+            val view : CrossSweepArcView = CrossSweepArcView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
